@@ -1,60 +1,57 @@
 package com.example.mvvm.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
-import com.bumptech.glide.request.RequestOptions
 import com.example.mvvm.R
 import com.example.mvvm.models.NicePlace
+import java.util.ArrayList
 
-import de.hdodenhof.circleimageview.CircleImageView
+
+class RecyclerAdapter(private val _mNicePlaces: List<NicePlace>, private val context: Context) :
+    RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
 
-class RecyclerAdapter(context: Context, nicePlaces: List<NicePlace>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var mNicePlaces: List<NicePlace> = nicePlaces
-    private var mContext: Context = context
+
+    //private var mContext: Context = context
 
 
     @NonNull
-    override fun onCreateViewHolder(@NonNull viewGroup: ViewGroup, i: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.layout_listitem, viewGroup, false)
-        return ViewHolder(view)
+        return ViewHolder(view, context,_mNicePlaces)
     }
 
-    override fun onBindViewHolder(@NonNull viewHolder: RecyclerView.ViewHolder, i: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
 
         // Set the name of the 'NicePlace'
 
-        val viewHolderTemp = viewHolder as ViewHolder
-        viewHolderTemp.mName.text = mNicePlaces[i].title
-
-
-        // Set the image
-        val defaultOptions: RequestOptions = RequestOptions()
-            .error(R.drawable.ic_launcher_background)
-        Glide.with(mContext)
-            .setDefaultRequestOptions(defaultOptions)
-            .load(mNicePlaces[i].imageUrl)
-            .into((viewHolderTemp).mImage)
-
+        viewHolder.mName.text = _mNicePlaces[i].title
     }
 
     override fun getItemCount(): Int {
-        return mNicePlaces.size
+        return _mNicePlaces.size
     }
 
-    class ViewHolder(@NonNull itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        val mImage: CircleImageView = itemView.findViewById(R.id.image)
-        val mName: TextView = itemView.findViewById(R.id.image_name)    }
+    class ViewHolder(itemView: View, private val context: Context,private val nicePlaces: List<NicePlace>) :
+        RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        val mName: TextView = itemView.findViewById(R.id.image_name)
+        override fun onClick(v: View) {
+            Log.d("nicePlaces[i].link = ",nicePlaces[0].imageUrl)
+        }
+        init{
+            itemView.setOnClickListener(this)
+        }
+
+        }
 
 
 }
