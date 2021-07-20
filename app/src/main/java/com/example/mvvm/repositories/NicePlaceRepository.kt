@@ -1,7 +1,5 @@
 package com.example.mvvm.repositories
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.example.mvvm.models.NicePlace
 import okhttp3.*
 import java.util.*
@@ -28,12 +26,9 @@ class NicePlaceRepository {
 
 
     // Pretend to get data from a webservice or online source
-    fun getNicePlaces(): MutableLiveData<List<NicePlace>>{
+    fun getNicePlaces(): List<NicePlace> {
         setNicePlaces()
-        val data: MutableLiveData<List<NicePlace>> = MutableLiveData()
-        Log.d("dataSet[0].title = ", dataSet[0].title)
-        data.postValue(dataSet)
-        return data
+        return dataSet
     }
     private fun getTitles(html: String?): ArrayList<String> {
         val doc: Document = Jsoup.parse(html, "utf-8")

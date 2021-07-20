@@ -2,26 +2,17 @@ package com.example.mvvm
 
 import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm.adapters.RecyclerAdapter
 import com.example.mvvm.models.NicePlace
 import com.example.mvvm.viewmodels.MainActivityViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
-
-
-
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecyclerAdapter? = null
-
-
     private lateinit var mMainActivityViewModel: MainActivityViewModel
     private val niceListUpdatesObserver = Observer<List<NicePlace>> {
         mNicePlaces ->
@@ -40,8 +31,5 @@ class MainActivity : AppCompatActivity() {
         mMainActivityViewModel.mNicePlaces.observe(this,niceListUpdatesObserver)
 
     }
-
-
-
 
 }
