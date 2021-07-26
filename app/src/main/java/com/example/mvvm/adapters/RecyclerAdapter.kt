@@ -16,12 +16,6 @@ import com.example.mvvm.models.NicePlace
 
 class RecyclerAdapter(private val _mNicePlaces: List<NicePlace>, private val context: Context) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-
-
-
-    //private var mContext: Context = context
-
-
     @NonNull
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context)

@@ -58,5 +58,8 @@ dependencies {
     //Add lifecycle dependencies
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 
+    //Koin
+    implementation "io.insert-koin:koin-android:3.1.2"
+
 
 }
